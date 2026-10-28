@@ -8,6 +8,7 @@
 | judge_super | Nemotron 3 Super 120B | Nemotron 3 Super 120B | Nemotron 3 Super 120B | 94% | 62% | 14/21 | $0.270 | $0.106 | $0.115 |
 | judge_nano | Nemotron 3 Super 120B | Nemotron 3 Super 120B | Nemotron 3 Nano 30B | 94% | 75% | 16/21 | $0.200 | $0.036 | $0.115 |
 | triage_nano | Nemotron 3 Nano 30B | Nemotron 3 Super 120B | Nemotron 3 Ultra 550B | 75% | 92% | 16/21 | $0.587 | $0.436 | $0.130 |
+| extract_nano | Nemotron 3 Super 120B | Nemotron 3 Nano 30B | Nemotron 3 Ultra 550B | 88% | 93% | 18/21 | $0.515 | $0.432 | $0.026 |
 
 Accuracy counts a verdict as correct when it is in the allowed set for that scheme (for example a UK Carer's Allowance claim may be `likely` or `need_info`, because it depends on the parent's benefit, which the person did not state).
 
@@ -40,3 +41,8 @@ Accuracy counts a verdict as correct when it is in the allowed set for that sche
 - **germany_student** - expected `deutschlandstipendium` was never surfaced (merit based; needs grades).
 - **karnataka_farmer** - Pradhan Mantri Kisan Samman Nidhi (PM-KISAN): got `need_info`, expected one of `eligible/likely` (landholding farmer family). Model said: "You appear to be a small farmer with cultivable land, but the scheme requires the land to be in your name per land records as of 1 Feb 2019, and your family must match the definition (husband, wife, minor children who own the land). We need to confirm these details."
 - **canada_senior** - expected `old age security|oas` was never surfaced (65+, 10+ years residence).
+
+### extract_nano (3 failures)
+- **germany_student** - BAföG: got `not_eligible`, expected one of `eligible/likely` (German citizen, under 45, first degree, low parental income). Model said: "You are not eligible because this BAföG scheme as described by Studentenwerk Chemnitz-Zwickau appears to be limited to students of the Duale Hochschule Sachsen, and you are attending TU Dresden."
+- **germany_student** - expected `deutschlandstipendium` was never surfaced (merit based; needs grades).
+- **us_veteran** - expected `va home loan|va-backed|home loan guaranty|va loan` was never surfaced (veteran with qualifying service).

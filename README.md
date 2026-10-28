@@ -37,7 +37,15 @@ The live activity panel shows every step as it happens: each Tavily query, each 
 
 We labelled 8 profiles (India, US, UK, Germany, Canada; students, a single mother, a carer, a farmer, a veteran, a pensioner) with 21 expected (scheme, verdict) pairs and ran the pipeline under six model assignments. Full table and every failure case, in the models' own words, in [docs/EVALS.md](docs/EVALS.md).
 
-EVALS_TABLE_PLACEHOLDER
+| Configuration | Triage | Rules | Verdicts | Expected schemes found | Verdict accuracy | Correct / 21 | Nemotron cost, 8 runs |
+|---|---|---|---|---|---|---|---|
+| **split (shipped)** | Super | Super | **Ultra** | 94% | 88% | **18** | $0.61 |
+| judge on Super | Super | Super | Super | 94% | 62% | 14 | $0.27 |
+| judge on Nano | Super | Super | Nano | 94% | 75% | 16 | $0.20 |
+| triage on Nano (our first version) | Nano | Super | Ultra | 75% | 92% | 16 | $0.59 |
+| rules on Nano | Super | Nano | Ultra | 88% | 93% | 18 | $0.52 |
+
+Ultra as the judge is what buys accuracy: the same pages judged by Super drop from 18 to 14 correct. Nano triage loses a quarter of the expected schemes before anyone judges them. Rules on Nano looks competitive on this small set but surfaces fewer schemes; the shipped split keeps Super there. An all-Ultra run of the sweep was interrupted by the machine and is not in the table.
 
 Two things we learned and changed:
 
