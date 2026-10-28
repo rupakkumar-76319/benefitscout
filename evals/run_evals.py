@@ -115,11 +115,36 @@ def write_report(results: list[dict], profiles: list[dict]) -> str:
     return "\n".join(L)
 
 
+def rescore(results: list[dict], profiles: list[dict]) -> None:
+    """Re-apply the labels in profiles.json to stored results (after a label fix, no model calls)."""
+    by_id = {p["id"]: p for p in profiles}
+    for r in results:
+        for row in r["rows"]:
+            exp = by_id[row["id"]]["expect"]
+            for s, e in zip(row["scores"], exp):
+                s["match"], s["verdicts"], s["note"] = e["match"], e["verdicts"], e["note"]
+                s["ok"] = (s["got"] in e["verdicts"]) if s["found"] else (e["verdicts"] == ["not_eligible"])
+        flat = [s for row in r["rows"] for s in row["scores"]]
+        found = [s for s in flat if s["found"]]
+        pos = [s for s in flat if s["verdicts"] != ["not_eligible"]]
+        r["recall"] = round(sum(s["found"] for s in pos) / len(pos), 3) if pos else 0
+        r["accuracy"] = round(sum(s["ok"] for s in found) / len(found), 3) if found else 0
+        r["correct_total"] = sum(s["ok"] for s in flat)
+
+
 def main():
     profiles = json.loads((ROOT / "evals" / "profiles.json").read_text(encoding="utf-8"))
+    out_json = ROOT / "evals" / "results.json"
+    if sys.argv[1:] == ["--rescore"]:
+        results = json.loads(out_json.read_text(encoding="utf-8"))
+        rescore(results, profiles)
+        out_json.write_text(json.dumps(results, indent=1, ensure_ascii=False), encoding="utf-8")
+        (ROOT / "docs" / "EVALS.md").write_text(write_report(results, profiles), encoding="utf-8")
+        for r in results:
+            print(f"{r['name']:14s} recall {r['recall']:.0%}  accuracy {r['accuracy']:.0%}  correct {r['correct_total']}/{r['n_expect']}  ${r['cost']:.3f}")
+        return
     names = sys.argv[1:] or list(CONFIGS)
     results = []
-    out_json = ROOT / "evals" / "results.json"
     if out_json.exists():
         results = [r for r in json.loads(out_json.read_text(encoding="utf-8")) if r["name"] not in names]
     for n in names:

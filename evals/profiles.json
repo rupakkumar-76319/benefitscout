@@ -32,7 +32,7 @@
     "expect": [
       {"match": "mudra|pmmy", "verdicts": ["eligible", "likely"], "note": "non-farm micro enterprise loan, any adult"},
       {"match": "yuva udyami|mukhyamantri yuva|cm yuva|cm-yuva", "verdicts": ["eligible", "likely", "need_info"], "note": "UP youth entrepreneur scheme, age 21-40, class 8 pass"},
-      {"match": "post-matric|post matric", "verdicts": ["not_eligible", "need_info"], "note": "not currently studying"}
+      {"match": "post-matric|post matric", "verdicts": ["not_eligible"], "note": "not currently studying, so a student scholarship should be skipped or rejected"}
     ]
   },
   {
