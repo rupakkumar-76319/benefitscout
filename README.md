@@ -44,8 +44,9 @@ We labelled 8 profiles (India, US, UK, Germany, Canada; students, a single mothe
 | judge on Nano | Super | Super | Nano | 94% | 75% | 16 | $0.20 |
 | triage on Nano (our first version) | Nano | Super | Ultra | 75% | 92% | 16 | $0.59 |
 | rules on Nano | Super | Nano | Ultra | 88% | 93% | 18 | $0.52 |
+| everything on Ultra | Ultra | Ultra | Ultra | 69% | 83% | 14 | $0.95 |
 
-Ultra as the judge is what buys accuracy: the same pages judged by Super drop from 18 to 14 correct. Nano triage loses a quarter of the expected schemes before anyone judges them. Rules on Nano looks competitive on this small set but surfaces fewer schemes; the shipped split keeps Super there. An all-Ultra run of the sweep was interrupted by the machine and is not in the table.
+Ultra as the judge is what buys accuracy: the same pages judged by Super drop from 18 to 14 correct. Nano triage loses a quarter of the expected schemes before anyone judges them. And everything-on-Ultra is both the most expensive row and one of the worst: Ultra over-filters at triage (it dropped Medicaid and WIC for the Ohio mother, and PM-KISAN for the farmer), so the right-sized split beats the biggest model on accuracy and on cost. Rules on Nano looks competitive on this small set but surfaces fewer schemes; the shipped split keeps Super there.
 
 Two things we learned and changed:
 

@@ -9,6 +9,7 @@
 | judge_nano | Nemotron 3 Super 120B | Nemotron 3 Super 120B | Nemotron 3 Nano 30B | 94% | 75% | 16/21 | $0.200 | $0.036 | $0.115 |
 | triage_nano | Nemotron 3 Nano 30B | Nemotron 3 Super 120B | Nemotron 3 Ultra 550B | 75% | 92% | 16/21 | $0.587 | $0.436 | $0.130 |
 | extract_nano | Nemotron 3 Super 120B | Nemotron 3 Nano 30B | Nemotron 3 Ultra 550B | 88% | 93% | 18/21 | $0.515 | $0.432 | $0.026 |
+| all_ultra | Nemotron 3 Ultra 550B | Nemotron 3 Ultra 550B | Nemotron 3 Ultra 550B | 69% | 83% | 14/21 | $0.952 | $0.357 | $0.431 |
 
 Accuracy counts a verdict as correct when it is in the allowed set for that scheme (for example a UK Carer's Allowance claim may be `likely` or `need_info`, because it depends on the parent's benefit, which the person did not state).
 
@@ -46,3 +47,12 @@ Accuracy counts a verdict as correct when it is in the allowed set for that sche
 - **germany_student** - BAföG: got `not_eligible`, expected one of `eligible/likely` (German citizen, under 45, first degree, low parental income). Model said: "You are not eligible because this BAföG scheme as described by Studentenwerk Chemnitz-Zwickau appears to be limited to students of the Duale Hochschule Sachsen, and you are attending TU Dresden."
 - **germany_student** - expected `deutschlandstipendium` was never surfaced (merit based; needs grades).
 - **us_veteran** - expected `va home loan|va-backed|home loan guaranty|va loan` was never surfaced (veteran with qualifying service).
+
+### all_ultra (7 failures)
+- **bihar_sc_student** - expected `post.?matric scholarship.*(sc|scheduled caste)` was never surfaced (SC, Bihar domicile, income under 2.5 lakh, post-matric course).
+- **ohio_single_mother** - expected `medicaid` was never surfaced (parent under 138% FPL).
+- **ohio_single_mother** - expected `wic|women, infants` was never surfaced (4-year-old qualifies; income under 185% FPL).
+- **uk_carer** - Universal Credit: got `eligible`, expected one of `likely/need_info` (low income, working age; savings threshold unknown). Model said: "You meet the 'out of work' condition for Universal Credit because you stopped working two years ago. The other conditions (low income, cannot work) are alternatives you don't need to prove."
+- **germany_student** - Deutschlandstipendium at Trier University of Applied Sciences: got `not_eligible`, expected one of `need_info/likely` (merit based; needs grades). Model said: "The Deutschlandstipendium at Trier University of Applied Sciences is only for students enrolled at that specific university, but you are starting your studies at TU Dresden."
+- **karnataka_farmer** - expected `pm-kisan|pm kisan|kisan samman` was never surfaced (landholding farmer family).
+- **karnataka_farmer** - expected `fasal bima|pmfby|crop insurance` was never surfaced (cultivating farmer with KCC).

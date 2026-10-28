@@ -1886,5 +1886,373 @@
   "judge_cost": 0.4316,
   "extract_cost": 0.0264,
   "seconds": 3.3
+ },
+ {
+  "name": "all_ultra",
+  "triage": "Nemotron 3 Ultra 550B",
+  "extract": "Nemotron 3 Ultra 550B",
+  "judge": "Nemotron 3 Ultra 550B",
+  "rows": [
+   {
+    "id": "bihar_sc_student",
+    "scores": [
+     {
+      "match": "post.?matric scholarship.*(sc|scheduled caste)",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "SC, Bihar domicile, income under 2.5 lakh, post-matric course",
+      "found": false,
+      "ok": false,
+      "got": "not surfaced"
+     },
+     {
+      "match": "bc/ebc|backward class",
+      "verdicts": [
+       "not_eligible"
+      ],
+      "note": "scheme is for BC/EBC, she is SC",
+      "found": true,
+      "ok": true,
+      "got": "not_eligible",
+      "scheme": "BC/EBC Post Matric Scholarship",
+      "why": "This scholarship is exclusively for students from BC or EBC categories, and your stated category is SC.",
+      "confidence": 0.95
+     },
+     {
+      "match": "kishori shakti",
+      "verdicts": [
+       "not_eligible"
+      ],
+      "note": "11-18 only",
+      "found": false,
+      "ok": true,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 5,
+    "cost": 0.0913,
+    "seconds": 28.3,
+    "judge_cost": 0.034461,
+    "extract_cost": 0.042627000000000005,
+    "tavily_credits": 14.0
+   },
+   {
+    "id": "ohio_single_mother",
+    "scores": [
+     {
+      "match": "snap|supplemental nutrition",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "household of 3 at ~$22.8k/yr is under 130% FPL",
+      "found": true,
+      "ok": true,
+      "got": "likely",
+      "scheme": "Supplemental Nutrition Assistance Program (SNAP)",
+      "why": "You likely qualify for SNAP because your income for a family of three is well below the 130% poverty threshold, and your household composition fits the assistance group definition.",
+      "confidence": 0.85
+     },
+     {
+      "match": "medicaid",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "parent under 138% FPL",
+      "found": false,
+      "ok": false,
+      "got": "not surfaced"
+     },
+     {
+      "match": "wic|women, infants",
+      "verdicts": [
+       "eligible",
+       "likely",
+       "need_info"
+      ],
+      "note": "4-year-old qualifies; income under 185% FPL",
+      "found": false,
+      "ok": false,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 7,
+    "cost": 0.113,
+    "seconds": 25.7,
+    "judge_cost": 0.052572999999999995,
+    "extract_cost": 0.041561,
+    "tavily_credits": 13.0
+   },
+   {
+    "id": "uk_carer",
+    "scores": [
+     {
+      "match": "carer's allowance|carers allowance|carer’s allowance",
+      "verdicts": [
+       "likely",
+       "need_info"
+      ],
+      "note": "35+ hours/week, but depends on mother's qualifying benefit",
+      "found": true,
+      "ok": true,
+      "got": "need_info",
+      "scheme": "Carer's Allowance",
+      "why": "You meet the age, residence, education, and care-hours requirements, but eligibility hinges on whether your mother receives a qualifying disability benefit and whether another carer is already claiming for her. Your earnings also need to be confirmed as £204 or less per week.",
+      "confidence": 0.65
+     },
+     {
+      "match": "universal credit",
+      "verdicts": [
+       "likely",
+       "need_info"
+      ],
+      "note": "low income, working age; savings threshold unknown",
+      "found": true,
+      "ok": false,
+      "got": "eligible",
+      "scheme": "Universal Credit",
+      "why": "You meet the 'out of work' condition for Universal Credit because you stopped working two years ago. The other conditions (low income, cannot work) are alternatives you don't need to prove.",
+      "confidence": 0.9
+     },
+     {
+      "match": "state pension",
+      "verdicts": [
+       "not_eligible"
+      ],
+      "note": "under state pension age",
+      "found": false,
+      "ok": true,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 9,
+    "cost": 0.158,
+    "seconds": 34.8,
+    "judge_cost": 0.072303,
+    "extract_cost": 0.069135,
+    "tavily_credits": 14.0
+   },
+   {
+    "id": "up_obc_entrepreneur_hindi",
+    "scores": [
+     {
+      "match": "mudra|pmmy",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "non-farm micro enterprise loan, any adult",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Pradhan Mantri MUDRA Yojana (PMMY)",
+      "why": "You meet both quoted eligibility criteria: your planned kirana store is a trading enterprise covered by the scheme, and new units are expressly allowed. The loan amount you need (likely under ₹10 lakh) fits within the Shishu/Kishore/Tarun categories.",
+      "confidence": 0.95
+     },
+     {
+      "match": "yuva udyami|mukhyamantri yuva|cm yuva|cm-yuva",
+      "verdicts": [
+       "eligible",
+       "likely",
+       "need_info"
+      ],
+      "note": "UP youth entrepreneur scheme, age 21-40, class 8 pass",
+      "found": true,
+      "ok": true,
+      "got": "need_info",
+      "scheme": "मुख्यमंत्री युवा उद्यमी विकास अभियान (CM Yuva Udyami Vikas Abhiyan)",
+      "why": "You meet the age and education requirements for the CM Yuva Udyami Vikas Abhiyan, but the scheme also requires a skill training certificate. We need to know whether you have one to confirm eligibility.",
+      "confidence": 0.9
+     },
+     {
+      "match": "post-matric|post matric",
+      "verdicts": [
+       "not_eligible"
+      ],
+      "note": "not currently studying, so a student scholarship should be skipped or rejected",
+      "found": false,
+      "ok": true,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 3,
+    "cost": 0.0971,
+    "seconds": 21.9,
+    "judge_cost": 0.021001,
+    "extract_cost": 0.059386,
+    "tavily_credits": 17.0
+   },
+   {
+    "id": "germany_student",
+    "scores": [
+     {
+      "match": "bafög|bafog|bafoeg",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "German citizen, under 45, first degree, low parental income",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "BAföG und Studienstarthilfe",
+      "why": "You meet the university requirement for BAföG because TU Dresden is on the approved list. The other listed criterion is only for students at a different institution and does not affect you.",
+      "confidence": 0.9
+     },
+     {
+      "match": "deutschlandstipendium",
+      "verdicts": [
+       "need_info",
+       "likely"
+      ],
+      "note": "merit based; needs grades",
+      "found": true,
+      "ok": false,
+      "got": "not_eligible",
+      "scheme": "Deutschlandstipendium at Trier University of Applied Sciences",
+      "why": "The Deutschlandstipendium at Trier University of Applied Sciences is only for students enrolled at that specific university, but you are starting your studies at TU Dresden.",
+      "confidence": 0.95
+     }
+    ],
+    "n_schemes": 9,
+    "cost": 0.1922,
+    "seconds": 71.1,
+    "judge_cost": 0.068367,
+    "extract_cost": 0.09738599999999999,
+    "tavily_credits": 18.0
+   },
+   {
+    "id": "karnataka_farmer",
+    "scores": [
+     {
+      "match": "pm-kisan|pm kisan|kisan samman",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "landholding farmer family",
+      "found": false,
+      "ok": false,
+      "got": "not surfaced"
+     },
+     {
+      "match": "fasal bima|pmfby|crop insurance",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "cultivating farmer with KCC",
+      "found": false,
+      "ok": false,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 0,
+    "cost": 0.0173,
+    "seconds": 9.2,
+    "judge_cost": 0,
+    "extract_cost": 0,
+    "tavily_credits": 8.0
+   },
+   {
+    "id": "us_veteran",
+    "scores": [
+     {
+      "match": "gi bill|post-9/11",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "12 years active duty after 9/11, honorable discharge",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Post-9/11 GI Bill (Chapter 33)",
+      "why": "You meet the primary eligibility requirement for the Post-9/11 GI Bill because you served on active duty after September 10, 2001. The Reservist pathway is not relevant to your service history.",
+      "confidence": 0.95
+     },
+     {
+      "match": "va home loan|va-backed|home loan guaranty|va loan",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "veteran with qualifying service",
+      "found": true,
+      "ok": true,
+      "got": "likely",
+      "scheme": "VA-backed Purchase Loan",
+      "why": "You appear to meet the veteran service requirements for a VA-backed purchase loan, which can help you buy your first home with no down payment.",
+      "confidence": 0.85
+     }
+    ],
+    "n_schemes": 6,
+    "cost": 0.116,
+    "seconds": 48.2,
+    "judge_cost": 0.041726,
+    "extract_cost": 0.048697000000000004,
+    "tavily_credits": 12.0
+   },
+   {
+    "id": "canada_senior",
+    "scores": [
+     {
+      "match": "old age security|oas",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "65+, 10+ years residence",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Old Age Security (OAS)",
+      "why": "You meet all Old Age Security criteria: you are over 65, have lived in Canada for more than 40 years after age 18, and your income is far below the thresholds that would reduce or eliminate benefits.",
+      "confidence": 0.95
+     },
+     {
+      "match": "guaranteed income supplement|gis",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "low income OAS recipient",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Guaranteed Income Supplement",
+      "why": "You meet both requirements: you are over 65 and your age, citizenship, long residence, and low income make you eligible for Old Age Security, which is the prerequisite for the Guaranteed Income Supplement.",
+      "confidence": 0.9
+     },
+     {
+      "match": "canada child benefit",
+      "verdicts": [
+       "not_eligible"
+      ],
+      "note": "no children under 18",
+      "found": false,
+      "ok": true,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 10,
+    "cost": 0.1674,
+    "seconds": 59.9,
+    "judge_cost": 0.066895,
+    "extract_cost": 0.07193699999999999,
+    "tavily_credits": 20.0
+   }
+  ],
+  "n_expect": 21,
+  "recall": 0.688,
+  "accuracy": 0.833,
+  "correct_total": 14,
+  "cost": 0.9523,
+  "judge_cost": 0.3573,
+  "extract_cost": 0.4307,
+  "seconds": 94.7
  }
 ]
