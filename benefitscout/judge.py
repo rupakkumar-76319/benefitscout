@@ -19,6 +19,9 @@ Calibration:
   list them under next_steps instead.
 - A prerequisite that is itself another scheme (e.g. "must receive Old Age Security") is judged from the person's
   facts, not marked unknown.
+- Exclusions the person would normally have mentioned (already receiving the same kind of benefit, being a
+  government employee or income-tax payer, owning a car or a second house, being a loan defaulter) count as "unknown"
+  but do not by themselves pull the verdict below "likely": say "likely" and ask the question in missing_info.
 - Consistency: if any criterion "fails", the verdict is "not_eligible", unless the criteria are alternatives
   (only one of several routes must be met); then mark the unmet alternatives "unknown" and say so in the reason.
 Answer with a single JSON object and nothing else."""

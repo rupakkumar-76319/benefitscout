@@ -15,8 +15,8 @@ Extract its rules as JSON. Quote the page verbatim for every criterion so the re
 paraphrase into the "quote" field and do not add criteria the page does not state. Criteria are conditions ABOUT THE
 PERSON (age, income, residence, citizenship, study, category, occupation, disability, family, housing). Which office
 handles the application, how to apply, documents to submit and deadlines are NOT criteria; put them in the other fields. If the page is not actually about
-one specific scheme (it is a news story, a list of many schemes, a login page, an error page), set
-"page_is_scheme" to false.
+one specific scheme (it is a news story, a list of many schemes, an application portal or platform such as a national
+scholarship portal, a login page, an error page), set "page_is_scheme" to false.
 
 Page URL: {url}
 Page text:
@@ -75,6 +75,22 @@ def _fetch(urls: list[str], page_text: dict[str, str], wled: web.WebLedger, emit
         page_text[u] = fetched.get(u) or norm.get(u.rstrip("/")) or ""
 
 
+TRUSTED = (".gov", ".nic.in", ".gouv", ".bund.de", ".gc.ca", "europa.eu", ".edu", ".ac.", "wikipedia.org", ".org")
+AGGREGATORS = ("paisabazaar", "bankbazaar", "policybazaar", "groww", "cleartax", "sarkariyojana", "yojana", "myadvo",
+               "indiafilings", "vakilsearch", "testbook", "jagranjosh", "collegedunia", "shiksha.com", "buddy4study", "nerdwallet",
+               "forbes.com", "investopedia", "money.com")
+
+
+def _source_rank(url: str) -> int:
+    """0 official/encyclopedic, 1 other, 2 commercial aggregator (often stale or wrong)."""
+    u = url.lower()
+    if any(a in u for a in AGGREGATORS):
+        return 2
+    if any(t in u for t in TRUSTED):
+        return 0
+    return 1
+
+
 def _norm_name(n: str) -> str:
     n = re.sub(r"\(.*?\)", " ", (n or "").lower())
     n = re.sub(r"[^a-z0-9 ]", " ", n)
@@ -118,9 +134,10 @@ def extract_all(cands: list[dict], page_text: dict[str, str], ledger: llm.Ledger
 
         def find_alt(b):
             c = b["_candidate"]
-            res = web.search(f"{c['name']} eligibility criteria documents how to apply", wled, max_results=5)
+            res = web.search(f"{c['name']} eligibility criteria documents how to apply", wled, max_results=6)
             alts = [r for r in res if r["url"].rstrip("/") != c["url"].rstrip("/")
                     and "myscheme.gov.in" not in r["url"] and not r["url"].lower().endswith(".pdf")]
+            alts.sort(key=lambda r: _source_rank(r["url"]))
             return alts[:2]
 
         alts = llm.pmap(find_alt, retry, workers=4)

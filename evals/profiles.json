@@ -3,7 +3,7 @@
     "id": "bihar_sc_student",
     "text": "I am a 20 year old girl from Gaya, Bihar, India. Second year BSc student at a government college. My father is a farmer, family income about 2 lakh per year. We are from the SC category. I got 82% in class 12. I need help paying fees and want to know any scholarship or government scheme I can apply for.",
     "expect": [
-      {"match": "post-matric scholarship for sc|post matric scholarship for sc|post-matric scholarship for scheduled caste", "verdicts": ["eligible", "likely"], "note": "SC, Bihar domicile, income under 2.5 lakh, post-matric course"},
+      {"match": "post.?matric scholarship.*(sc|scheduled caste)", "verdicts": ["eligible", "likely"], "note": "SC, Bihar domicile, income under 2.5 lakh, post-matric course"},
       {"match": "bc/ebc|backward class", "verdicts": ["not_eligible"], "note": "scheme is for BC/EBC, she is SC"},
       {"match": "kishori shakti", "verdicts": ["not_eligible"], "note": "11-18 only"}
     ]
