@@ -1,0 +1,383 @@
+[
+ {
+  "name": "split",
+  "triage": "Nemotron 3 Super 120B",
+  "extract": "Nemotron 3 Super 120B",
+  "judge": "Nemotron 3 Ultra 550B",
+  "rows": [
+   {
+    "id": "bihar_sc_student",
+    "scores": [
+     {
+      "match": "post.?matric scholarship.*(sc|scheduled caste)",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "SC, Bihar domicile, income under 2.5 lakh, post-matric course",
+      "found": true,
+      "ok": true,
+      "got": "likely",
+      "scheme": "Bihar Post Matric Scholarship SC-ST",
+      "why": "You meet the core residence and category criteria, but you need to confirm you aren't already getting another scholarship for this course and session, and you must gather the required certificates and complete Aadhaar seeding before applying.",
+      "confidence": 0.9
+     },
+     {
+      "match": "bc/ebc|backward class",
+      "verdicts": [
+       "not_eligible"
+      ],
+      "note": "scheme is for BC/EBC, she is SC",
+      "found": false,
+      "ok": true,
+      "got": "not surfaced"
+     },
+     {
+      "match": "kishori shakti",
+      "verdicts": [
+       "not_eligible"
+      ],
+      "note": "11-18 only",
+      "found": false,
+      "ok": true,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 4,
+    "cost": 0.041,
+    "seconds": 33.4,
+    "judge_cost": 0.026456,
+    "extract_cost": 0.0096744,
+    "tavily_credits": 13.0
+   },
+   {
+    "id": "ohio_single_mother",
+    "scores": [
+     {
+      "match": "snap|supplemental nutrition",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "household of 3 at ~$22.8k/yr is under 130% FPL",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Supplemental Nutrition Assistance Program (SNAP)",
+      "why": "You meet all SNAP eligibility criteria for Ohio: your income is below the 130% poverty threshold for a family of three, you live in Ohio, and your household composition qualifies.",
+      "confidence": 0.95
+     },
+     {
+      "match": "medicaid",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "parent under 138% FPL",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Ohio Medicaid",
+      "why": "You meet Ohio residency and your income falls well within the adult Medicaid limit (138% of poverty level for a family of three). Your children also qualify under the higher children's limit.",
+      "confidence": 0.95
+     },
+     {
+      "match": "wic|women, infants",
+      "verdicts": [
+       "eligible",
+       "likely",
+       "need_info"
+      ],
+      "note": "4-year-old qualifies; income under 185% FPL",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Ohio Women, Infants, and Children (WIC) Program",
+      "why": "You qualify because your 4-year-old child is within the eligible age range, you live in Ohio, and your income is far below the program's limit. The remaining steps are a clinic visit for a nutritional assessment and document verification.",
+      "confidence": 0.9
+     }
+    ],
+    "n_schemes": 7,
+    "cost": 0.0729,
+    "seconds": 33.1,
+    "judge_cost": 0.054889999999999994,
+    "extract_cost": 0.0116595,
+    "tavily_credits": 12.0
+   },
+   {
+    "id": "uk_carer",
+    "scores": [
+     {
+      "match": "carer's allowance|carers allowance|carer’s allowance",
+      "verdicts": [
+       "likely",
+       "need_info"
+      ],
+      "note": "35+ hours/week, but depends on mother's qualifying benefit",
+      "found": true,
+      "ok": true,
+      "got": "likely",
+      "scheme": "Carer's Allowance",
+      "why": "You meet the age, residence, education, citizenship, earnings, and care-hours rules. The only gaps are whether you share care with someone who already claims a conflicting benefit; if you are the sole carer (or the other carer claims none of those), you are eligible.",
+      "confidence": 0.85
+     },
+     {
+      "match": "universal credit",
+      "verdicts": [
+       "likely",
+       "need_info"
+      ],
+      "note": "low income, working age; savings threshold unknown",
+      "found": true,
+      "ok": true,
+      "got": "likely",
+      "scheme": "Universal Credit housing costs element",
+      "why": "You qualify as a private tenant for Universal Credit housing help; your age and family size mean you'll get at least a two-bedroom Local Housing Allowance rate.",
+      "confidence": 0.85
+     },
+     {
+      "match": "state pension",
+      "verdicts": [
+       "not_eligible"
+      ],
+      "note": "under state pension age",
+      "found": false,
+      "ok": true,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 8,
+    "cost": 0.0796,
+    "seconds": 35.3,
+    "judge_cost": 0.058829,
+    "extract_cost": 0.0149553,
+    "tavily_credits": 12.0
+   },
+   {
+    "id": "up_obc_entrepreneur_hindi",
+    "scores": [
+     {
+      "match": "mudra|pmmy",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "non-farm micro enterprise loan, any adult",
+      "found": true,
+      "ok": true,
+      "got": "likely",
+      "scheme": "Pradhan Mantri Mudra Yojana (PMMY)",
+      "why": "You meet the core eligibility criteria (age, citizenship, business type) for a Mudra loan. The main gaps are confirming the loan amount stays under ₹20 lakh and having a formal business plan, both of which are typical and manageable for a small grocery store.",
+      "confidence": 0.85
+     },
+     {
+      "match": "yuva udyami|mukhyamantri yuva|cm yuva|cm-yuva",
+      "verdicts": [
+       "eligible",
+       "likely",
+       "need_info"
+      ],
+      "note": "UP youth entrepreneur scheme, age 21-40, class 8 pass",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Mukhyamantri Yuva Udyami Vikas Abhiyan (CMYUVA)",
+      "why": "You meet all three eligibility criteria: you are a resident of Uttar Pradesh, aged 24 (within 21-40), and have a B.Com degree (well above 8th standard).",
+      "confidence": 0.95
+     },
+     {
+      "match": "post-matric|post matric",
+      "verdicts": [
+       "not_eligible",
+       "need_info"
+      ],
+      "note": "not currently studying",
+      "found": true,
+      "ok": false,
+      "got": "likely",
+      "scheme": "Centrally Sponsored Scheme of Post-Matric Scholarship for OBC, EBC and DNT Students for studying in India",
+      "why": "You meet the citizenship, residence, category, education, and income criteria for the OBC post-matric scholarship. The only uncertainty is the family-boy limit, which depends on your gender and your brothers' scholarship history.",
+      "confidence": 0.85
+     }
+    ],
+    "n_schemes": 6,
+    "cost": 0.0652,
+    "seconds": 35.8,
+    "judge_cost": 0.043087,
+    "extract_cost": 0.0147012,
+    "tavily_credits": 14.0
+   },
+   {
+    "id": "germany_student",
+    "scores": [
+     {
+      "match": "bafög|bafog|bafoeg",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "German citizen, under 45, first degree, low parental income",
+      "found": true,
+      "ok": true,
+      "got": "likely",
+      "scheme": "BAföG",
+      "why": "You meet the core eligibility criterion of studying at a listed Saxon university (TU Dresden). The remaining items are about which office processes your application, not whether you qualify.",
+      "confidence": 0.9
+     },
+     {
+      "match": "deutschlandstipendium",
+      "verdicts": [
+       "need_info",
+       "likely"
+      ],
+      "note": "merit based; needs grades",
+      "found": false,
+      "ok": false,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 7,
+    "cost": 0.0986,
+    "seconds": 40.9,
+    "judge_cost": 0.07621800000000001,
+    "extract_cost": 0.0147132,
+    "tavily_credits": 16.0
+   },
+   {
+    "id": "karnataka_farmer",
+    "scores": [
+     {
+      "match": "pm-kisan|pm kisan|kisan samman",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "landholding farmer family",
+      "found": true,
+      "ok": false,
+      "got": "need_info",
+      "scheme": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+      "why": "You appear to be a small farmer with cultivable land, but the scheme requires the land to be in your name per land records as of 1 Feb 2019, and your family must match the definition (husband, wife, minor children who own the land). We need to confirm these details.",
+      "confidence": 0.55
+     },
+     {
+      "match": "fasal bima|pmfby|crop insurance",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "cultivating farmer with KCC",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Pradhan Mantri Fasal Bima Yojana",
+      "why": "You are a farmer growing sugarcane and ragi in Karnataka, so you qualify for crop insurance under PMFBY.",
+      "confidence": 0.85
+     }
+    ],
+    "n_schemes": 6,
+    "cost": 0.086,
+    "seconds": 35.2,
+    "judge_cost": 0.057288000000000006,
+    "extract_cost": 0.0223632,
+    "tavily_credits": 17.0
+   },
+   {
+    "id": "us_veteran",
+    "scores": [
+     {
+      "match": "gi bill|post-9/11",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "12 years active duty after 9/11, honorable discharge",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Post-9/11 GI Bill (Chapter 33)",
+      "why": "You meet the primary eligibility requirement for the Post-9/11 GI Bill because you served on active duty after September 10, 2001. The Reserve-specific criterion is an alternative path that does not apply to you.",
+      "confidence": 0.95
+     },
+     {
+      "match": "va home loan|va-backed|home loan guaranty|va loan",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "veteran with qualifying service",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "VA-Backed Purchase Loan",
+      "why": "You are an honorably discharged veteran with 12 years of service, which meets the VA's core eligibility requirement for a VA-backed purchase loan.",
+      "confidence": 0.95
+     }
+    ],
+    "n_schemes": 7,
+    "cost": 0.0594,
+    "seconds": 28.3,
+    "judge_cost": 0.041969000000000006,
+    "extract_cost": 0.0116592,
+    "tavily_credits": 12.0
+   },
+   {
+    "id": "canada_senior",
+    "scores": [
+     {
+      "match": "old age security|oas",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "65+, 10+ years residence",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Old Age Security (OAS)",
+      "why": "You meet all the eligibility criteria for Old Age Security: you are over 65, have lived in Canada for 40 years, and are a Canadian citizen.",
+      "confidence": 0.95
+     },
+     {
+      "match": "guaranteed income supplement|gis",
+      "verdicts": [
+       "eligible",
+       "likely"
+      ],
+      "note": "low income OAS recipient",
+      "found": true,
+      "ok": true,
+      "got": "eligible",
+      "scheme": "Guaranteed Income Supplement",
+      "why": "You meet both GIS requirements: you are over 65 and your age, citizenship, long‑term residence and low income mean you qualify for the Old Age Security pension, which makes you eligible for the Guaranteed Income Supplement.",
+      "confidence": 0.9
+     },
+     {
+      "match": "canada child benefit",
+      "verdicts": [
+       "not_eligible"
+      ],
+      "note": "no children under 18",
+      "found": false,
+      "ok": true,
+      "got": "not surfaced"
+     }
+    ],
+    "n_schemes": 10,
+    "cost": 0.1053,
+    "seconds": 43.5,
+    "judge_cost": 0.082374,
+    "extract_cost": 0.015050399999999999,
+    "tavily_credits": 16.0
+   }
+  ],
+  "n_expect": 21,
+  "recall": 0.941,
+  "accuracy": 0.875,
+  "correct_total": 18,
+  "cost": 0.608,
+  "judge_cost": 0.4411,
+  "extract_cost": 0.1148,
+  "seconds": 79.4
+ }
+]
