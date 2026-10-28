@@ -67,6 +67,22 @@ would unlock more), "first_action" (the one thing to do today),
 "questions" (list of up to 4 questions whose answers would most change the results)."""
 
 
+def _conf(v) -> float:
+    """Confidence as a number in [0, 1]; smaller models sometimes answer with a word."""
+    words = {"very high": 0.95, "high": 0.85, "medium": 0.6, "moderate": 0.6, "low": 0.3, "very low": 0.15}
+    if isinstance(v, str):
+        if v.strip().lower() in words:
+            return words[v.strip().lower()]
+        try:
+            v = float(v.strip().rstrip("%")) / (100 if "%" in v else 1)
+        except ValueError:
+            return 0.5
+    try:
+        return max(0.0, min(1.0, float(v)))
+    except (TypeError, ValueError):
+        return 0.5
+
+
 def judge_one(prof: dict, rules: dict, ledger: llm.Ledger) -> dict:
     crit = "\n".join(f"{c['id']} [{c.get('type','other')}] {c['text']}\n    quote: \"{(c.get('quote') or '')[:400]}\""
                      for c in rules["criteria"])
@@ -82,6 +98,7 @@ def judge_one(prof: dict, rules: dict, ledger: llm.Ledger) -> dict:
         j = by_id.get(c["id"], {})
         merged.append({**c, "verdict": j.get("verdict", "unknown"), "reason": j.get("reason", "")})
     out["criteria"] = merged
+    out["confidence"] = _conf(out.get("confidence"))
     out.setdefault("missing_info", [])
     out.setdefault("next_steps", [])
     out.setdefault("blocking", [])
