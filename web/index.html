@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BenefitScout</title>
+<meta name="description" content="Find the public benefits, scholarships and grants you qualify for, with the rules cited. Nemotron on Nebius Token Factory + Tavily.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f7b6c'/%3E%3Cpath d='M9 17l5 5 9-11' stroke='white' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true"></span>
+    <div>
+      <h1>BenefitScout</h1>
+      <p>Find the public benefits, scholarships and grants you qualify for. Every rule quoted from its source.</p>
+    </div>
+  </div>
+  <div class="stack" id="stack">
+    <span class="chip"><b>Nemotron 3</b> Nano · Super · Ultra</span>
+    <span class="chip">Nebius Token Factory</span>
+    <span class="chip">Tavily search · extract · crawl</span>
+    <button class="ghost" id="historyBtn" type="button">History</button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="panel input">
+    <label for="text">Describe your situation, in any language</label>
+    <textarea id="text" rows="7" placeholder="Where you live, your age, what you study or do, your family's income, anything else that matters to you..."></textarea>
+    <div class="examples" id="examples">
+      <span class="muted">Try:</span>
+      <button type="button" data-ex="bihar">Student in Bihar</button>
+      <button type="button" data-ex="us">Single mother in Ohio</button>
+      <button type="button" data-ex="uk">Carer in Manchester</button>
+      <button type="button" data-ex="hindi">हिन्दी में</button>
+    </div>
+    <div class="controls">
+      <label class="toggle"><input type="checkbox" id="deep" checked> <span>Also crawl the official portal</span></label>
+      <button class="primary" id="go" type="button">Find what I qualify for</button>
+    </div>
+
+    <div class="stages" id="stages" hidden>
+      <div data-stage="profile"><i></i><b>Profile</b><small>Nano</small></div>
+      <div data-stage="plan"><i></i><b>Plan</b><small>Super</small></div>
+      <div data-stage="search"><i></i><b>Search</b><small>Tavily</small></div>
+      <div data-stage="triage"><i></i><b>Triage</b><small>Nano</small></div>
+      <div data-stage="rules"><i></i><b>Rules</b><small>Super</small></div>
+      <div data-stage="judge"><i></i><b>Judge</b><small>Ultra</small></div>
+      <div data-stage="summary"><i></i><b>Summary</b><small>Super</small></div>
+    </div>
+    <div class="activity" id="activity" hidden>
+      <div class="activity-head"><span>Agent activity</span><span id="timer" class="mono">0.0 s</span></div>
+      <ol id="log"></ol>
+    </div>
+  </section>
+
+  <section class="results" id="results">
+    <div class="empty" id="empty">
+      <h2>How it works</h2>
+      <ol>
+        <li><b>Nemotron Nano</b> turns what you wrote into a profile and asks what is missing.</li>
+        <li><b>Nemotron Super</b> plans the research; <b>Tavily</b> searches official sites and crawls the national scheme portal.</li>
+        <li><b>Nano</b> triages dozens of pages to the schemes that could fit you.</li>
+        <li><b>Tavily</b> extracts each scheme page; <b>Super</b> writes down every rule with a verbatim quote.</li>
+        <li><b>Nemotron Ultra</b> decides, rule by rule, whether <em>you</em> meet it, and what to ask if it cannot tell.</li>
+        <li>Save the result and BenefitScout re-checks it for new schemes and changed deadlines.</li>
+      </ol>
+      <p class="muted">Nothing here is legal advice. Every verdict links to the page it was read from, so you can check it yourself.</p>
+    </div>
+  </section>
+</main>
+
+<aside class="drawer" id="drawer" hidden>
+  <div class="drawer-head"><h3>Previous searches</h3><button class="ghost" id="closeDrawer" type="button">Close</button></div>
+  <ul id="runs"></ul>
+</aside>
+
+<footer class="foot">
+  <span>Built for the Nebius x NVIDIA Global AI Hackathon. Open source, MIT.</span>
+  <span id="tavilyUsage" class="muted"></span>
+</footer>
+
+<template id="schemeTpl">
+  <article class="scheme">
+    <header>
+      <div class="title">
+        <h3></h3>
+        <div class="meta"></div>
+      </div>
+      <div class="verdict"><span class="badge"></span><span class="conf mono"></span></div>
+    </header>
+    <p class="benefit"></p>
+    <p class="why"></p>
+    <details class="criteria">
+      <summary></summary>
+      <table><thead><tr><th>Rule</th><th>You</th><th>Why</th></tr></thead><tbody></tbody></table>
+    </details>
+    <div class="extras"></div>
+    <footer class="src"></footer>
+  </article>
+</template>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+[
+  {
+    "id": "bihar_sc_student",
+    "text": "I am a 20 year old girl from Gaya, Bihar, India. Second year BSc student at a government college. My father is a farmer, family income about 2 lakh per year. We are from the SC category. I got 82% in class 12. I need help paying fees and want to know any scholarship or government scheme I can apply for.",
+    "expect": [
+      {"match": "post-matric scholarship for sc|post matric scholarship for sc|post-matric scholarship for scheduled caste", "verdicts": ["eligible", "likely"], "note": "SC, Bihar domicile, income under 2.5 lakh, post-matric course"},
+      {"match": "bc/ebc|backward class", "verdicts": ["not_eligible"], "note": "scheme is for BC/EBC, she is SC"},
+      {"match": "kishori shakti", "verdicts": ["not_eligible"], "note": "11-18 only"}
+    ]
+  },
+  {
+    "id": "ohio_single_mother",
+    "text": "I'm a 34 year old single mom in Dayton, Ohio with two kids aged 4 and 7. I work part time at a grocery store making about $1,900 a month. I rent an apartment. I'd like to go back to community college for nursing but can't afford childcare or tuition.",
+    "expect": [
+      {"match": "snap|supplemental nutrition", "verdicts": ["eligible", "likely"], "note": "household of 3 at ~$22.8k/yr is under 130% FPL"},
+      {"match": "medicaid", "verdicts": ["eligible", "likely"], "note": "parent under 138% FPL"},
+      {"match": "wic|women, infants", "verdicts": ["eligible", "likely", "need_info"], "note": "4-year-old qualifies; income under 185% FPL"}
+    ]
+  },
+  {
+    "id": "uk_carer",
+    "text": "I'm 52, live in Manchester, UK, and stopped working two years ago to look after my mother who has dementia. I care for her about 50 hours a week. My savings are nearly gone and I rent privately. I'm a British citizen.",
+    "expect": [
+      {"match": "carer's allowance|carers allowance|carer’s allowance", "verdicts": ["likely", "need_info"], "note": "35+ hours/week, but depends on mother's qualifying benefit"},
+      {"match": "universal credit", "verdicts": ["likely", "need_info"], "note": "low income, working age; savings threshold unknown"},
+      {"match": "state pension", "verdicts": ["not_eligible"], "note": "under state pension age"}
+    ]
+  },
+  {
+    "id": "up_obc_entrepreneur_hindi",
+    "text": "मैं 24 साल का हूँ, उत्तर प्रदेश के गोरखपुर का रहने वाला हूँ। मैंने B.Com किया है और अभी बेरोज़गार हूँ। मैं अपना छोटा किराना स्टोर खोलना चाहता हूँ। मेरे पिता किसान हैं, परिवार की सालाना आय लगभग 1.5 लाख है। हम OBC वर्ग से हैं।",
+    "expect": [
+      {"match": "mudra|pmmy", "verdicts": ["eligible", "likely"], "note": "non-farm micro enterprise loan, any adult"},
+      {"match": "yuva udyami|mukhyamantri yuva|cm yuva|cm-yuva", "verdicts": ["eligible", "likely", "need_info"], "note": "UP youth entrepreneur scheme, age 21-40, class 8 pass"},
+      {"match": "post-matric|post matric", "verdicts": ["not_eligible", "need_info"], "note": "not currently studying"}
+    ]
+  },
+  {
+    "id": "germany_student",
+    "text": "I'm a 22 year old German citizen starting a bachelor's degree in mechanical engineering at TU Dresden this October. My parents are divorced; my mother earns about 28,000 euros a year and my father pays no maintenance. I have no savings and need help with living costs.",
+    "expect": [
+      {"match": "bafög|bafog|bafoeg", "verdicts": ["eligible", "likely"], "note": "German citizen, under 45, first degree, low parental income"},
+      {"match": "deutschlandstipendium", "verdicts": ["need_info", "likely"], "note": "merit based; needs grades"}
+    ]
+  },
+  {
+    "id": "karnataka_farmer",
+    "text": "I am a 45 year old small farmer in Mandya district, Karnataka, India. I own 1.5 acres of land where I grow sugarcane and ragi. Family of five, annual income around 1.2 lakh. I have a Kisan Credit Card. My daughter is in class 10.",
+    "expect": [
+      {"match": "pm-kisan|pm kisan|kisan samman", "verdicts": ["eligible", "likely"], "note": "landholding farmer family"},
+      {"match": "fasal bima|pmfby|crop insurance", "verdicts": ["eligible", "likely"], "note": "cultivating farmer with KCC"}
+    ]
+  },
+  {
+    "id": "us_veteran",
+    "text": "I'm a 41 year old Army veteran in San Antonio, Texas, honorably discharged in 2019 after 12 years. I have a 30% VA disability rating for my knee. I want to use education benefits to finish a computer science degree and I'm also looking at buying my first house.",
+    "expect": [
+      {"match": "gi bill|post-9/11", "verdicts": ["eligible", "likely"], "note": "12 years active duty after 9/11, honorable discharge"},
+      {"match": "va home loan|va-backed|home loan guaranty|va loan", "verdicts": ["eligible", "likely"], "note": "veteran with qualifying service"}
+    ]
+  },
+  {
+    "id": "canada_senior",
+    "text": "I'm 71, a Canadian citizen living in Winnipeg, Manitoba, for the last 40 years. My only income is about $14,000 a year from CPP and a small pension. I own my small house. My wife passed away last year.",
+    "expect": [
+      {"match": "old age security|oas", "verdicts": ["eligible", "likely"], "note": "65+, 10+ years residence"},
+      {"match": "guaranteed income supplement|gis", "verdicts": ["eligible", "likely"], "note": "low income OAS recipient"},
+      {"match": "canada child benefit", "verdicts": ["not_eligible"], "note": "no children under 18"}
+    ]
+  }
+]
