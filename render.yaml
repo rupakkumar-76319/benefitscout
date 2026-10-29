@@ -1,0 +1,19 @@
+# Render blueprint: https://render.com/deploy?repo=https://github.com/rupakkumar-76319/benefitscout
+# Free web service built from the Dockerfile. Render injects PORT; the Dockerfile's CMD honours it.
+services:
+  - type: web
+    name: benefitscout
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /api/status
+    autoDeploy: true
+    envVars:
+      - key: NEBIUS_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: BS_DATA_DIR
+        value: /data
+      - key: PYTHONUNBUFFERED
+        value: "1"

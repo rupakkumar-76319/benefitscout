@@ -3,17 +3,28 @@
 The app is a single container: FastAPI serves the API and the static front end. Any Docker host works.
 Judges need a public URL, so pick one of these.
 
-## Hugging Face Space (free CPU, no card)
+## Render (free, no card) — what the demo runs on
 
-1. Create a Space: type **Docker**, visibility public, hardware CPU basic.
-2. In the Space settings add two **secrets**: `NEBIUS_API_KEY`, `TAVILY_API_KEY`
-   (and optionally `BS_DATA_DIR=/data` as a variable; the Dockerfile already sets it).
-3. Push this repository to the Space, with a README that starts with the Space front matter:
+`render.yaml` at the repo root is a Render blueprint. One click:
+
+1. Sign in at https://render.com with GitHub.
+2. Open https://render.com/deploy?repo=https://github.com/rupakkumar-76319/benefitscout
+   (or New > Blueprint and pick the repository).
+3. Render asks for the two secrets it cannot read from the file: `NEBIUS_API_KEY` and `TAVILY_API_KEY`. Paste them, then Apply.
+4. The first build takes 3-5 minutes. The service URL is `https://benefitscout.onrender.com` (or with a suffix if the name is taken).
+
+The free plan sleeps after 15 minutes without traffic and takes about a minute to wake, so open the URL once before a demo.
+Saved runs live in `/data` inside the container and do not survive a redeploy, which is fine for a demo.
+
+## Hugging Face Space
+
+Docker Spaces need a paid plan since late 2026 (only Static Spaces are free). If you have PRO: create a Docker Space,
+add the two secrets in Settings, and push the `space` branch of this repo, whose README starts with the Space front matter:
 
 ```
 ---
 title: BenefitScout
-emoji: ✅
+emoji: "✅"
 colorFrom: green
 colorTo: gray
 sdk: docker
@@ -23,17 +34,10 @@ license: mit
 ---
 ```
 
-   The GitHub README does not need the front matter, so keep a separate branch or prepend it in the Space copy:
-
 ```bash
 git remote add space https://huggingface.co/spaces/<user>/benefitscout
-git checkout -b space
-{ printf -- '---\ntitle: BenefitScout\nemoji: ✅\ncolorFrom: green\ncolorTo: gray\nsdk: docker\napp_port: 7860\npinned: false\nlicense: mit\n---\n\n'; cat README.md; } > README.tmp && mv README.tmp README.md
-git commit -am "Space front matter" && git push space space:main
-git checkout main
+git push space space:main
 ```
-
-Saved runs live in `/data` inside the container, which does not survive a rebuild on the free tier; that is fine for a demo.
 
 ## Nebius (encouraged by the track, not required)
 
