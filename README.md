@@ -2,6 +2,8 @@
 
 **Describe your situation in any language. BenefitScout finds the government benefits, scholarships and grants you qualify for, and shows you the rule, quoted from the source, behind every verdict.**
 
+**Live demo: https://benefitscout.onrender.com** (free tier: the first visit after 15 idle minutes takes about a minute to wake).
+
 Built for the Nebius x NVIDIA Global AI Hackathon, *Best Apps and Agents* track. Runs on **NVIDIA Nemotron 3** (Nano, Super and Ultra) on **Nebius Token Factory**, with **Tavily** for live search, crawl and extraction.
 
 > *"I am a 20 year old girl from Gaya, Bihar. Second year BSc at a government college. Father is a farmer, family income about 2 lakh. SC category. 82% in class 12."*
